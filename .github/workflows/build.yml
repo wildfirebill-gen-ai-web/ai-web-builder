@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: ai-web-builder-windows
-          path: apps/desktop/release/*.{exe,msi}
+          path: apps/desktop/release/
           compression-level: 0
 
       - name: Upload to release
@@ -91,7 +91,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: ai-web-builder-macos
-          path: apps/desktop/release/*.{dmg,app,zip}
+          path: apps/desktop/release/
           compression-level: 0
 
       - name: Upload to release
@@ -142,7 +142,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: ai-web-builder-linux
-          path: apps/desktop/release/*.{AppImage,deb,rpm}
+          path: apps/desktop/release/
           compression-level: 0
 
       - name: Upload to release
