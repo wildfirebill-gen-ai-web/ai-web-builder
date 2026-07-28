@@ -1,0 +1,91 @@
+<svg width="1280" height="640" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03">
+    <line x1="0" y1="0" x2="1280" y2="0" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="40" x2="1280" y2="40" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="80" x2="1280" y2="80" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="120" x2="1280" y2="120" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="160" x2="1280" y2="160" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1280" y2="200" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="240" x2="1280" y2="240" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="280" x2="1280" y2="280" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="320" x2="1280" y2="320" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="360" x2="1280" y2="360" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="400" x2="1280" y2="400" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="440" x2="1280" y2="440" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="480" x2="1280" y2="480" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="520" x2="1280" y2="520" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="560" x2="1280" y2="560" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="600" x2="1280" y2="600" stroke="white" stroke-width="1"/>
+  </g>
+
+  <!-- Accent line -->
+  <rect x="80" y="200" width="200" height="4" rx="2" fill="url(#accent)"/>
+
+  <!-- Title -->
+  <text x="80" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="white">AI Web Builder</text>
+  
+  <!-- Tagline -->
+  <text x="80" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#94a3b8">Open-source AI-powered website generator</text>
+
+  <!-- Feature tags -->
+  <rect x="80" y="380" rx="6" width="100" height="32" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="130" y="401" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#60a5fa" text-anchor="middle">Local-First</text>
+
+  <rect x="196" y="380" rx="6" width="110" height="32" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="251" y="401" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#60a5fa" text-anchor="middle">10+ Providers</text>
+
+  <rect x="322" y="380" rx="6" width="130" height="32" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="387" y="401" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#60a5fa" text-anchor="middle">Website Cloning</text>
+
+  <rect x="468" y="380" rx="6" width="110" height="32" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="523" y="401" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#60a5fa" text-anchor="middle">13-Layer Arch</text>
+
+  <rect x="594" y="380" rx="6" width="110" height="32" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="649" y="401" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#60a5fa" text-anchor="middle">Desktop + Web</text>
+
+  <!-- Illustration - right side -->
+  <rect x="720" y="180" width="480" height="300" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  
+  <!-- Code lines in the illustration -->
+  <rect x="760" y="220" width="120" height="8" rx="4" fill="#3b82f6" opacity="0.6"/>
+  <rect x="760" y="248" width="200" height="8" rx="4" fill="#475569"/>
+  <rect x="760" y="272" width="180" height="8" rx="4" fill="#475569"/>
+  <rect x="760" y="296" width="160" height="8" rx="4" fill="#475569"/>
+  <rect x="760" y="320" width="220" height="8" rx="4" fill="#475569"/>
+  <rect x="760" y="344" width="140" height="8" rx="4" fill="#475569"/>
+  <rect x="760" y="368" width="190" height="8" rx="4" fill="#475569"/>
+  <rect x="760" y="392" width="100" height="8" rx="4" fill="#8b5cf6" opacity="0.6"/>
+  <rect x="760" y="416" width="170" height="8" rx="4" fill="#475569"/>
+  
+  <!-- Arrow -->
+  <text x="1060" y="450" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#94a3b8" text-anchor="end">→ Built with Next.js + Electron</text>
+
+  <!-- Bottom bar -->
+  <rect x="80" y="520" width="1120" height="1" fill="#334155"/>
+  
+  <!-- Platform badges -->
+  <text x="80" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748b">Windows</text>
+  <circle cx="110" cy="556" r="3" fill="#22c55e"/>
+  <text x="170" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748b">macOS</text>
+  <circle cx="196" cy="556" r="3" fill="#22c55e"/>
+  <text x="260" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748b">Linux</text>
+  <circle cx="286" cy="556" r="3" fill="#22c55e"/>
+  <text x="350" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748b">Docker</text>
+  <circle cx="380" cy="556" r="3" fill="#22c55e"/>
+
+  <text x="1100" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748b">Open Source · MIT</text>
+</svg>
