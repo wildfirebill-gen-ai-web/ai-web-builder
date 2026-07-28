@@ -37,26 +37,18 @@
     "appId": "com.ai-web-builder.desktop",
     "productName": "AI Web Builder",
     "directories": {
-      "app": ".",
       "output": "release"
     },
+    "extends": null,
+    "npmRebuild": false,
     "win": {
-      "target": [
-        "nsis"
-      ],
-      "icon": null
+      "target": ["nsis"]
     },
     "mac": {
-      "target": [
-        "dmg"
-      ],
-      "icon": null
+      "target": ["dmg"]
     },
     "linux": {
-      "target": [
-        "AppImage"
-      ],
-      "icon": null
+      "target": ["AppImage"]
     }
   }
 }
