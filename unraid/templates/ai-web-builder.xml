@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Container version="2">
+  <Name>AIWebBuilder</Name>
+  <Repository>ghcr.io/wildfirebill-gen-ai-web/ai-web-builder:latest</Repository>
+  <Registry>https://github.com/wildfirebill-gen-ai-web/ai-web-builder</Registry>
+  <Network>bridge</Network>
+  <Shell>/bin/sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/wildfirebill-gen-ai-web/ai-web-builder/issues</Support>
+  <Project>https://github.com/wildfirebill-gen-ai-web/ai-web-builder</Project>
+  <Overview>AI Web Builder is an open-source AI-powered website generator that transforms natural language descriptions into production-grade websites. Supports Ollama, OpenAI, Anthropic Claude, Google Gemini, and 10+ AI providers. Local-first architecture with 13 production layers (Frontend, API, Database, Auth, Deployment, CI/CD, Security, Rate Limiting, Caching, Load Balancing, Error Tracking, Recovery).</Overview>
+  <Category>Productivity: Web: AI:</Category>
+  <WebUI>http://[IP]:[PORT:3000]</WebUI>
+  <Icon>https://raw.githubusercontent.com/wildfirebill-gen-ai-web/ai-web-builder/main/unraid/icons/ai-web-builder.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/wildfirebill-gen-ai-web/ai-web-builder/main/unraid/templates/ai-web-builder.xml</TemplateURL>
+  <DonateText>Support Development</DonateText>
+  <DonateURL>https://github.com/sponsors/wildfirebill-gen-ai-web</DonateURL>
+  <Requires>
+    <Requires name="Ollama" link="https://ollama.ai" description="AI inference engine for local model execution" optional="true">Ollama</Requires>
+  </Requires>
+  <Changes>
+    - Initial Unraid release
+  </Changes>
+
+  <Config Name="WebUI Port" Target="3000" Default="3000" Mode="tcp" Description="Web interface port for the AI Web Builder application." Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+
+  <Config Name="App Data" Target="/app/data" Default="/mnt/user/appdata/ai-web-builder/data" Mode="rw" Description="Persistent storage for generated projects, settings, and user data." Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/ai-web-builder/data</Config>
+
+  <Config Name="Ollama URL" Target="OLLAMA_URL" Default="http://192.168.1.100:11434" Mode="" Description="URL of your Ollama instance. Use http://ollama:11434 if running the Ollama container alongside, or enter your host IP if Ollama is on the host or another machine." Type="Variable" Display="always" Required="false" Mask="false">http://192.168.1.100:11434</Config>
+
+  <Config Name="OpenAI API Key" Target="OPENAI_API_KEY" Default="" Mode="" Description="API key for OpenAI (GPT-4o, GPT-4o-mini). Leave blank if using local providers only." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="Anthropic API Key" Target="ANTHROPIC_API_KEY" Default="" Mode="" Description="API key for Anthropic Claude (Sonnet 4, Haiku, Opus). Leave blank if using local providers only." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="Gemini API Key" Target="GEMINI_API_KEY" Default="" Mode="" Description="API key for Google Gemini (2.5 Pro, 2.5 Flash). Leave blank if using local providers only." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="Groq API Key" Target="GROQ_API_KEY" Default="" Mode="" Description="API key for Groq (LLaMA 3.3, Mixtral, DeepSeek R1). Leave blank if using local providers only." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="DeepSeek API Key" Target="DEEPSEEK_API_KEY" Default="" Mode="" Description="API key for DeepSeek Chat. Leave blank if using local providers only." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="Mistral API Key" Target="MISTRAL_API_KEY" Default="" Mode="" Description="API key for Mistral AI (Mistral Large, Codestral). Leave blank if using local providers only." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="OpenRouter API Key" Target="OPENROUTER_API_KEY" Default="" Mode="" Description="API key for OpenRouter (200+ models unified API). Leave blank if using local providers only." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="Pexels API Key" Target="PEXELS_API_KEY" Default="" Mode="" Description="API key for Pexels royalty-free stock photos. Leave blank for fallback placeholders." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="Unsplash API Key" Target="UNSPLASH_ACCESS_KEY" Default="" Mode="" Description="API key for Unsplash royalty-free stock photos. Leave blank for fallback placeholders." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="Together API Key" Target="TOGETHER_API_KEY" Default="" Mode="" Description="API key for Together AI. Leave blank if using local providers only." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="Log Level" Target="LOG_LEVEL" Default="info" Mode="" Description="Logging verbosity: debug, info, warn, error." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+
+  <Config Name="Node Environment" Target="NODE_ENV" Default="production" Mode="" Description="Node.js environment mode." Type="Variable" Display="advanced" Required="false" Mask="false">production</Config>
+
+  <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Container timezone (e.g., America/New_York, Europe/London, Asia/Tokyo)." Type="Variable" Display="advanced" Required="false" Mask="false">America/New_York</Config>
+
+  <Config Name="Container Hostname" Target="HOSTNAME" Default="0.0.0.0" Mode="" Description="Bind address for the web server." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
+
+  <Config Name="Max Generation Tokens" Target="MAX_TOKENS" Default="8192" Mode="" Description="Maximum tokens for AI-generated content. Higher values allow longer output but consume more memory." Type="Variable" Display="advanced" Required="false" Mask="false">8192</Config>
+
+  <Config Name="Temperature" Target="TEMPERATURE" Default="0.7" Mode="" Description="AI generation temperature (0.0-2.0). Lower = more deterministic, higher = more creative." Type="Variable" Display="advanced" Required="false" Mask="false">0.7</Config>
+
+  <Config Name="Memory Limit" Target="" Default="0" Description="Memory limit for the container in MB (e.g., 2048). 0 = unlimited." Type="Integer" Display="advanced" Required="false" Mask="false" Min="0" Max="65536">0</Config>
+
+  <Config Name="CPU Pin" Target="" Default="" Description="Pin container to specific CPU cores (e.g., 0-3 or 0,2,4). Leave blank for all cores." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+
+  <Config Name="Extra Parameters" Target="" Default="" Description="Additional Docker run command parameters." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+
+  <Config Name="Privileged Mode" Target="PRIVILEGED" Default="false" Description="Run container in privileged mode. Not recommended unless required." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+
+  <Config Name="Show Console Output" Target="CONSOLE_OUTPUT" Default="false" Description="Enable to show console output in the Unraid log." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+
+  <LogType>DockerLog</LogType>
+  <LogLocation>/mnt/user/appdata/ai-web-builder/logs</LogLocation>
+  <LogRotate>7</LogRotate>
+  <Networking>
+    <Protocol>tcp</Protocol>
+    <Publish>
+      <Port>
+        <HostPort>3000</HostPort>
+        <ContainerPort>3000</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/ai-web-builder/data</HostDir>
+      <ContainerDir>/app/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Name>OLLAMA_URL</Name>
+      <Value>http://192.168.1.100:11434</Value>
+    </Variable>
+    <Variable>
+      <Name>NODE_ENV</Name>
+      <Value>production</Value>
+    </Variable>
+    <Variable>
+      <Name>HOSTNAME</Name>
+      <Value>0.0.0.0</Value>
+    </Variable>
+  </Environment>
+  <Labels>
+    <Label>
+      <Name>net.unraid.docker.icon</Name>
+      <Value>https://raw.githubusercontent.com/wildfirebill-gen-ai-web/ai-web-builder/main/unraid/icons/ai-web-builder.png</Value>
+    </Label>
+    <Label>
+      <Name>net.unraid.docker.managed</Name>
+      <Value>composemanual</Value>
+    </Label>
+    <Label>
+      <Name>net.unraid.docker.webui</Name>
+      <Value>http://[IP]:[PORT:3000]</Value>
+    </Label>
+    <Label>
+      <Name>net.unraid.docker.shell</Name>
+      <Value>/bin/sh</Value>
+    </Label>
+    <Label>
+      <Name>org.opencontainers.image.title</Name>
+      <Value>AI Web Builder</Value>
+    </Label>
+    <Label>
+      <Name>org.opencontainers.image.description</Name>
+      <Value>Open-source AI-powered website generator with 13-layer production architecture, supporting Ollama and 10+ AI providers.</Value>
+    </Label>
+    <Label>
+      <Name>org.opencontainers.image.url</Name>
+      <Value>https://github.com/wildfirebill-gen-ai-web/ai-web-builder</Value>
+    </Label>
+    <Label>
+      <Name>org.opencontainers.image.source</Name>
+      <Value>https://github.com/wildfirebill-gen-ai-web/ai-web-builder</Value>
+    </Label>
+    <Label>
+      <Name>org.opencontainers.image.licenses</Name>
+      <Value>MIT</Value>
+    </Label>
+  </Labels>
+</Container>

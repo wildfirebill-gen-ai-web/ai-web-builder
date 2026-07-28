@@ -1,0 +1,56 @@
+{
+  "name": "@awb/desktop",
+  "version": "0.1.0-beta",
+  "private": true,
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter @awb/web exec next dev -p 5173\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "node ../../scripts/build-desktop.js",
+    "build:win": "node ../../scripts/build-desktop.js && electron-builder --win --x64 --publish=never",
+    "build:mac": "node ../../scripts/build-desktop.js && electron-builder --mac --x64 --arm64 --publish=never",
+    "build:linux": "node ../../scripts/build-desktop.js && electron-builder --linux --x64 --publish=never",
+    "lint": "cd ../web && next lint"
+  },
+  "dependencies": {
+    "next": "^15.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@awb/core": "workspace:*",
+    "@awb/ui": "workspace:*",
+    "@awb/config": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.1.0",
+    "concurrently": "^9.0.0",
+    "wait-on": "^8.0.0",
+    "electron": "^34.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.aiwebuilder.desktop",
+    "productName": "AI Web Builder",
+    "directories": { "output": "release" },
+    "files": [
+      ".next/**/*",
+      "electron/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": ["nsis"],
+      "icon": null
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": null
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "icon": null
+    }
+  }
+}

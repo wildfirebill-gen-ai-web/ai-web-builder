@@ -1,0 +1,23 @@
+{
+  "name": "ai-web-builder",
+  "version": "0.1.0-beta",
+  "private": true,
+  "description": "Universal AI Website Builder - Desktop EXE + Web App",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "web": "pnpm --filter @awb/web dev",
+    "desktop": "pnpm --filter @awb/desktop dev",
+    "desktop:build": "pnpm --filter @awb/desktop build",
+    "clean": "turbo clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "^5.8.0"
+  },
+  "packageManager": "pnpm@10.8.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
