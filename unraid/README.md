@@ -2,7 +2,7 @@
 
 ## Quick Install (Community Applications)
 
-> **Note:** The container image must first be built or published to a registry (e.g., GitHub Container Registry). Once published, this template can be submitted to the Unraid Community Applications store.
+> The container image is automatically built and published to `ghcr.io/wildfirebill-gen-ai-web/ai-web-builder` by CI on every push to `main`. No manual build step needed.
 
 1. Open the **Apps** tab in Unraid
 2. Search for "AI Web Builder"

@@ -357,14 +357,11 @@ Requires [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-nat
 
 ### Unraid Deployment
 
-A Community Applications template is included at `unraid/templates/ai-web-builder.xml`. Deploy the web app + Ollama as a single stack with GPU passthrough support.
+A Community Applications template is at `unraid/templates/ai-web-builder.xml`. The image is automatically built and pushed to `ghcr.io/wildfirebill-gen-ai-web/ai-web-builder` by CI — no manual build needed.
 
-```bash
-# Build and push the Docker image to GHCR first
-./unraid/build-and-push.ps1
-```
+**Install:** Open the **Apps** tab in Unraid → search "AI Web Builder" → Install.
 
-Then install via Unraid's Community Apps store or manually add the template XML to your template directory.
+**Manual install:** Copy `unraid/templates/ai-web-builder.xml` to `/boot/config/plugins/dockerMan/templates-user/` on your Unraid server, then add the container from the Docker UI.
 
 ### Cross-Platform Build (CI)
 
