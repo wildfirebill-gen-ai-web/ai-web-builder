@@ -3,7 +3,7 @@
   "version": "0.1.0-beta",
   "private": true,
   "description": "AI Web Builder — Universal AI-powered website generator desktop app",
-  "author": "AI Web Builder",
+  "author": "Wildfirebill",
   "repository": "wildfirebill-gen-ai-web/ai-web-builder",
   "main": "electron/main.js",
   "scripts": {
