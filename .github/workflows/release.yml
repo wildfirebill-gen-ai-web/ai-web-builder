@@ -78,6 +78,12 @@ jobs:
             --generate-notes \
             $PRERELEASE_FLAG
 
+      - name: Trigger build workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run build.yml --ref main -f platform=all
+
       - name: Summary
         run: |
           echo "## Release v${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
@@ -86,4 +92,4 @@ jobs:
           echo "- **Tag:** v${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Prerelease:** ${{ inputs.prerelease }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "The [Build Desktop](../actions/workflows/build.yml) workflow has been triggered automatically." >> $GITHUB_STEP_SUMMARY
+          echo "The [Build Desktop](../actions/workflows/build.yml) workflow has been dispatched." >> $GITHUB_STEP_SUMMARY
