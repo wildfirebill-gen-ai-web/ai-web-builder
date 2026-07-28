@@ -1,4 +1,4 @@
-name: Create Release
+name: Create Release and Build
 
 on:
   workflow_dispatch:
@@ -18,10 +18,13 @@ env:
 
 jobs:
   create-release:
-    name: Create and publish release
+    name: Create release and tag
     runs-on: ubuntu-24.04
     permissions:
       contents: write
+    outputs:
+      version: ${{ steps.set-version.outputs.version }}
+      tag: ${{ steps.set-version.outputs.tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -39,14 +42,14 @@ jobs:
           version: 10.8.0
 
       - name: Bump versions across all packages
+        id: set-version
         run: |
           VERSION="${{ inputs.version }}"
           [ "${{ inputs.prerelease }}" = "true" ] && VERSION="${VERSION}-beta"
+          TAG="v${VERSION}"
 
-          # Update root package.json (updates pnpm-lock.yaml too)
           pnpm version "$VERSION" --no-git-tag-version --allow-same-version 2>/dev/null || true
 
-          # Update all workspace packages
           for pkg in apps/web apps/desktop packages/core packages/ui packages/config; do
             json="$pkg/package.json"
             [ -f "$json" ] && node -e "
@@ -57,6 +60,8 @@ jobs:
           done
 
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
 
       - name: Commit and tag
         run: |
@@ -64,27 +69,133 @@ jobs:
           git config user.email "github-actions@github.com"
           git add -A
           git commit -m "chore: bump version to ${{ env.VERSION }}"
-          git tag -a "v${{ env.VERSION }}" -m "v${{ env.VERSION }}"
+          git tag -a "${{ steps.set-version.outputs.tag }}" -m "${{ steps.set-version.outputs.tag }}"
           git push origin main --tags
 
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG="v${{ env.VERSION }}"
+          TAG="${{ steps.set-version.outputs.tag }}"
           PRERELEASE_FLAG="${{ inputs.prerelease == true && '--prerelease' || '' }}"
           gh release create "$TAG" \
             --title "$TAG" \
             --generate-notes \
             $PRERELEASE_FLAG
 
-      - name: Summary
+  build-windows:
+    name: Windows EXE
+    needs: [create-release]
+    runs-on: windows-2025
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 10.8.0
+      - run: pnpm install --frozen-lockfile=false
+      - run: pnpm --filter @awb/desktop build:win
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ai-web-builder-windows
+          path: apps/desktop/release/
+          compression-level: 0
+      - name: Upload to release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: apps/desktop/release/
+          tag_name: ${{ needs.create-release.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-macos:
+    name: macOS DMG
+    needs: [create-release]
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 10.8.0
+      - run: pnpm install --frozen-lockfile=false
+      - run: pnpm --filter @awb/desktop build:mac
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ai-web-builder-macos
+          path: apps/desktop/release/
+          compression-level: 0
+      - name: Upload to release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: apps/desktop/release/
+          tag_name: ${{ needs.create-release.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-linux:
+    name: Linux AppImage
+    needs: [create-release]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 10.8.0
+      - name: Install system deps
         run: |
-          echo "## Release v${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            rpm fakeroot dpkg-dev \
+            libx11-xcb1 libxcb-dri3-0 libxcomposite1 \
+            libxdamage1 libxfixes3 libxrandr2 \
+            libgtk-3-0 libgbm1 libpango-1.0-0 \
+            libcairo2 libasound2t64 libatk-bridge2.0-0t64
+      - run: pnpm install --frozen-lockfile=false
+      - run: pnpm --filter @awb/desktop build:linux
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ai-web-builder-linux
+          path: apps/desktop/release/
+          compression-level: 0
+      - name: Upload to release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: apps/desktop/release/
+          tag_name: ${{ needs.create-release.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  summary:
+    name: Release summary
+    needs: [create-release, build-windows, build-macos, build-linux]
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - run: |
+          echo "## Release ${{ needs.create-release.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Version:** ${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Tag:** v${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Prerelease:** ${{ inputs.prerelease }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Manually trigger the [Build Desktop](../actions/workflows/build.yml) workflow" >> $GITHUB_STEP_SUMMARY
-          echo "with \`release_tag: v${{ env.VERSION }}\` to build and upload artifacts." >> $GITHUB_STEP_SUMMARY
+          echo "| Platform | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Windows | ${{ needs.build-windows.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| macOS | ${{ needs.build-macos.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Linux | ${{ needs.build-linux.result }} |" >> $GITHUB_STEP_SUMMARY
