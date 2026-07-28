@@ -2,12 +2,15 @@
   "name": "@awb/desktop",
   "version": "0.1.0-beta",
   "private": true,
+  "description": "AI Web Builder — Universal AI-powered website generator desktop app",
+  "author": "AI Web Builder",
+  "repository": "wildfirebill-gen-ai-web/ai-web-builder",
   "main": "electron/main.js",
   "scripts": {
     "dev": "concurrently \"pnpm --filter @awb/web exec next dev -p 5173\" \"wait-on http://localhost:5173 && electron .\"",
     "build": "node ../../scripts/build-desktop.js",
     "build:win": "node ../../scripts/build-desktop.js && electron-builder --win --x64 --publish=never",
-    "build:mac": "node ../../scripts/build-desktop.js && electron-builder --mac --x64 --arm64 --publish=never",
+    "build:mac": "node ../../scripts/build-desktop.js && electron-builder --mac --arm64 --publish=never",
     "build:linux": "node ../../scripts/build-desktop.js && electron-builder --linux --x64 --publish=never",
     "lint": "pnpm --filter @awb/web lint"
   },
