@@ -1,6 +1,6 @@
 # AI Web Builder
 
-**Open-source AI-powered website builder** — Generate production-ready websites from natural language prompts. Supports Ollama, llama.cpp, OpenAI, Anthropic Claude, Google Gemini, and 10+ AI providers. Desktop app (Windows EXE, macOS DMG, Linux AppImage) and browser-based web app included. Local-first architecture with 13 production layers.
+**Open-source AI-powered website builder** — Generate production-ready websites from natural language prompts using local-first AI. Supports Ollama, llama.cpp, OpenAI GPT-4o, Anthropic Claude, Google Gemini, Groq, DeepSeek, Mistral AI, Together AI, and OpenRouter. Desktop app (Windows EXE, macOS DMG, Linux AppImage) and browser-based web app included. Local-first 13-layer architecture runs entirely offline with no API keys required for basic usage. Features website cloning from URLs, multi-source image generation (ComfyUI, SVG, stock APIs), Docker deployment, and Unraid Community Apps support.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)](https://www.typescriptlang.org/)

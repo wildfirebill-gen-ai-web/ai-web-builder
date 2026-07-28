@@ -1,0 +1,26 @@
+<svg width="1280" height="640" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect x="0" y="0" width="6" height="640" fill="url(#accent)"/>
+  <text x="80" y="180" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="800" fill="#ffffff">AI Web Builder</text>
+  <text x="80" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#94a3b8">Open-source AI-powered website generator</text>
+  <text x="80" y="310" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#64748b" letter-spacing="1">Local-First · 13-Layer Architecture · 10+ AI Providers</text>
+  <text x="80" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#64748b" letter-spacing="1">Desktop + Web + Docker + Unraid</text>
+  <rect x="80" y="410" width="200" height="50" rx="25" fill="url(#accent)"/>
+  <text x="180" y="442" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">v0.1.0-beta</text>
+  <circle cx="1100" cy="180" r="120" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.3"/>
+  <circle cx="1100" cy="180" r="80" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.4"/>
+  <circle cx="1100" cy="180" r="40" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.5"/>
+  <text x="1100" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#475569" text-anchor="middle">AI</text>
+  <rect x="80" y="540" width="1120" height="1" fill="#334155"/>
+  <text x="80" y="580" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#475569">Next.js 15 · Electron 34 · TypeScript 5.8 · Tailwind CSS 4 · Ollama · Turborepo</text>
+</svg>
