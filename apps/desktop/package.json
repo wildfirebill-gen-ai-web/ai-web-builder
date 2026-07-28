@@ -9,7 +9,7 @@
     "build:win": "node ../../scripts/build-desktop.js && electron-builder --win --x64 --publish=never",
     "build:mac": "node ../../scripts/build-desktop.js && electron-builder --mac --x64 --arm64 --publish=never",
     "build:linux": "node ../../scripts/build-desktop.js && electron-builder --linux --x64 --publish=never",
-    "lint": "cd ../web && next lint"
+    "lint": "cd ../web && eslint ."
   },
   "dependencies": {
     "next": "^15.3.0",
