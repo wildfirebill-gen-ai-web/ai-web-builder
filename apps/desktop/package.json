@@ -34,15 +34,12 @@
     "electron-builder": "^25.0.0"
   },
   "build": {
-    "appId": "com.aiwebuilder.desktop",
+    "appId": "com.ai-web-builder.desktop",
     "productName": "AI Web Builder",
-    "directories": { "output": "release" },
-    "files": [
-      ".next/**/*",
-      "electron/**/*",
-      "node_modules/**/*",
-      "package.json"
-    ],
+    "directories": {
+      "app": ".",
+      "output": "release"
+    },
     "win": {
       "target": ["nsis"],
       "icon": null
