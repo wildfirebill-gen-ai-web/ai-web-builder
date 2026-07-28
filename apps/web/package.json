@@ -1,6 +1,6 @@
 {
   "name": "@awb/web",
-  "version": "0.1.0-beta3-beta",
+  "version": "0.1.0-beta4-beta",
   "private": true,
   "scripts": {
     "dev": "next dev",
