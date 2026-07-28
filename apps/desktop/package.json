@@ -36,8 +36,8 @@
   "build": {
     "appId": "com.ai-web-builder.desktop",
     "productName": "AI Web Builder",
+    "executableName": "ai-web-builder",
     "directories": {
-      "buildResources": "build",
       "output": "release"
     },
     "npmRebuild": false,
@@ -46,7 +46,7 @@
       "icon": "build/icon.png"
     },
     "mac": {
-      "target": ["dmg"],
+      "target": ["zip"],
       "icon": "build/icon.png"
     },
     "linux": {
