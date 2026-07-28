@@ -1,6 +1,6 @@
 {
   "name": "@awb/desktop",
-  "version": "0.1.0-beta",
+  "version": "0.1.0-beta2-beta",
   "private": true,
   "description": "AI Web Builder — Universal AI-powered website generator desktop app",
   "author": "Wildfirebill",
@@ -41,15 +41,21 @@
       "output": "release"
     },
     "win": {
-      "target": ["nsis"],
+      "target": [
+        "nsis"
+      ],
       "icon": null
     },
     "mac": {
-      "target": ["dmg"],
+      "target": [
+        "dmg"
+      ],
       "icon": null
     },
     "linux": {
-      "target": ["AppImage"],
+      "target": [
+        "AppImage"
+      ],
       "icon": null
     }
   }
