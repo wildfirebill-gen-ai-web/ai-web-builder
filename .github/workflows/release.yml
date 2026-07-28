@@ -1,0 +1,89 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'New version (e.g., 0.2.0)'
+        required: true
+        type: string
+      prerelease:
+        description: 'Mark as prerelease (adds -beta suffix)'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  NODE_VERSION: "24"
+
+jobs:
+  create-release:
+    name: Create and publish release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10.8.0
+
+      - name: Bump versions across all packages
+        run: |
+          VERSION="${{ inputs.version }}"
+          [ "${{ inputs.prerelease }}" = "true" ] && VERSION="${VERSION}-beta"
+
+          # Update root package.json (updates pnpm-lock.yaml too)
+          pnpm version "$VERSION" --no-git-tag-version --allow-same-version 2>/dev/null || true
+
+          # Update all workspace packages
+          for pkg in apps/web apps/desktop packages/core packages/ui packages/config; do
+            json="$pkg/package.json"
+            [ -f "$json" ] && node -e "
+              const p = require('./$json');
+              p.version = '$VERSION';
+              require('fs').writeFileSync('./$json', JSON.stringify(p, null, 2) + '\n');
+            "
+          done
+
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Commit and tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git commit -m "chore: bump version to ${{ env.VERSION }}"
+          git tag -a "v${{ env.VERSION }}" -m "v${{ env.VERSION }}"
+          git push origin main --tags
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="v${{ env.VERSION }}"
+          PRERELEASE_FLAG="${{ inputs.prerelease == true && '--prerelease' || '' }}"
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes \
+            $PRERELEASE_FLAG
+
+      - name: Summary
+        run: |
+          echo "## Release v${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version:** ${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tag:** v${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Prerelease:** ${{ inputs.prerelease }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The [Build Desktop](../actions/workflows/build.yml) workflow has been triggered automatically." >> $GITHUB_STEP_SUMMARY
