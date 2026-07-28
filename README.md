@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)](https://www.typescriptlang.org/)
-[![Version](https://img.shields.io/badge/version-0.1.0--beta-orange)](https://github.com/wildfirebill-gen-ai-web/ai-web-builder)
+[![Version](https://img.shields.io/badge/version-0.2.0--beta-orange)](https://github.com/wildfirebill-gen-ai-web/ai-web-builder/releases)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![Electron](https://img.shields.io/badge/Electron-34-47848F)](https://www.electronjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8)](https://tailwindcss.com/)
