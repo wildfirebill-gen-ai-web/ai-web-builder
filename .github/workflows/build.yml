@@ -57,7 +57,7 @@ jobs:
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v3
         with:
-          files: apps/desktop/release/*.{exe}
+          files: apps/desktop/release/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -98,7 +98,7 @@ jobs:
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v3
         with:
-          files: apps/desktop/release/*.{dmg,zip}
+          files: apps/desktop/release/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -149,6 +149,6 @@ jobs:
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v3
         with:
-          files: apps/desktop/release/*.{AppImage,deb,rpm}
+          files: apps/desktop/release/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
