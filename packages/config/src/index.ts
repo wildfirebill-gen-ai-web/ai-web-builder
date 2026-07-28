@@ -1,9 +1,9 @@
-export const APP_VERSION = '0.1.0-beta'
+export const APP_VERSION = '0.2.0-beta'
 export const APP_NAME = 'AI Web Builder'
 export const APP_DESCRIPTION = 'Universal AI Website Builder — Desktop & Web'
 
-export const REPO_URL = 'https://github.com/wildfirebill-gen-ai-web'
-export const DOCS_URL = 'https://ai-web-builder.local/docs'
+export const REPO_URL = 'https://github.com/wildfirebill-gen-ai-web/ai-web-builder'
+export const DOCS_URL = 'https://wildfirebill-gen-ai-web.github.io/ai-web-builder'
 
 export const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'ja', 'zh', 'pt', 'ru'] as const
 export type Locale = typeof SUPPORTED_LOCALES[number]

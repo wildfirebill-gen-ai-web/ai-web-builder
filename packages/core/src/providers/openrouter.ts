@@ -43,7 +43,7 @@ export class OpenRouterProvider implements Provider {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.config.apiKey}`,
-        'HTTP-Referer': 'https://ai-web-builder.local',
+        'HTTP-Referer': 'https://wildfirebill-gen-ai-web.github.io/ai-web-builder',
       },
       body: JSON.stringify({
         model: options?.model || this.config.defaultModel,
@@ -73,7 +73,7 @@ export class OpenRouterProvider implements Provider {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.config.apiKey}`,
-        'HTTP-Referer': 'https://ai-web-builder.local',
+        'HTTP-Referer': 'https://wildfirebill-gen-ai-web.github.io/ai-web-builder',
       },
       body: JSON.stringify({
         model: options?.model || this.config.defaultModel,

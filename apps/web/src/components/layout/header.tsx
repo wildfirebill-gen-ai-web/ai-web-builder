@@ -1,5 +1,6 @@
 'use client'
 
+import { APP_VERSION } from '@awb/config'
 import { Select } from '@awb/ui'
 import { globalProviderRegistry } from '@awb/core'
 import { useEffect, useState } from 'react'
@@ -46,7 +47,7 @@ export function BuilderHeader({ providerId, onProviderChange, model, onModelChan
         </select>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-xs text-zinc-500">AI Web Builder v1</span>
+        <span className="text-xs text-zinc-500">AI Web Builder v{APP_VERSION}</span>
         <button onClick={onSettingsClick}
           className="h-8 px-3 rounded-md text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
           Settings
